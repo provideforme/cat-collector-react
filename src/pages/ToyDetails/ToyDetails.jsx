@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import './ToyDetails.css'
 
 // Services
+import { getOne } from '../../services/toys'
 
 
 // Components
@@ -13,7 +14,13 @@ const ToyDetails = ({ user }) => {
   const { id } = useParams()
   const [toy, setToy] = useState(null)
 
-  useEffect(() => {}, [id])
+  useEffect(() => {
+    const fetchOne = async () => {
+      const toyData = await getOne(id)
+      setToy(toyData)
+    }
+    fetchOne()
+  }, [id])
 
   return (
     toy &&
